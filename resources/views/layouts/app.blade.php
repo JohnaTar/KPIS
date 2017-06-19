@@ -132,7 +132,7 @@
                             <a href="tables.html"><i class="fa fa-table fa-fw"></i> Tables</a>
                         </li>
                         <li>
-                            <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>
+                            <a href="{{url('log')}}"><i class="fa fa-edit fa-fw"></i> History log</a>
                         </li>
                          <li>
                             <a href="{{url('table')}}"><i class="fa fa-sitemap fa-fw"></i> จัดการข้อมูลสมาชิก</a>

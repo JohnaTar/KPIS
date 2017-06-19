@@ -20,3 +20,4 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/table', 'HomeController@table');
 Route::get('/it', 'ItController@index');
+Route::get('/log','LogController@index');
