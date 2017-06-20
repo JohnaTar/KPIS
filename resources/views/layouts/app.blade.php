@@ -12,35 +12,35 @@
     <title>SB Admin 2 - Bootstrap Admin Theme</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ asset ('css/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
-    <link href="css/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+    <link href="{{ asset ('css/vendor/metisMenu/metisMenu.min.css')}}" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="css/dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="{{ asset('css/dist/css/sb-admin-2.css')}}" rel="stylesheet">
 
     <!-- Morris Charts CSS -->
-    <link href="css/vendor/morrisjs/morris.css" rel="stylesheet">
+    <link href="{{ asset('css/vendor/morrisjs/morris.css')}}" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="css/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/vendor/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
 
-     <script src="css/vendor/jquery/jquery.min.js"></script>
+     <script src="{{ asset('css/vendor/jquery/jquery.min.js')}}"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="css/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="{{ asset('css/vendor/bootstrap/js/bootstrap.min.js')}}"></script>
 
     <!-- Metis Menu Plugin JavaScript -->
-    <script src="css/vendor/metisMenu/metisMenu.min.js"></script>
+    <script src="{{ asset('css/vendor/metisMenu/metisMenu.min.js')}}"></script>
 
     <!-- Morris Charts JavaScript -->
-    <script src="css/vendor/raphael/raphael.min.js"></script>
-    <script src="css/vendor/morrisjs/morris.min.js"></script>
-    <script src="css/data/morris-data.js"></script>
+    <script src="{{ asset('css/vendor/raphael/raphael.min.js')}}"></script>
+    <script src="{{ asset('css/vendor/morrisjs/morris.min.js')}}"></script>
+    <script src="{{ asset('css/data/morris-data.js')}}"></script>
 
     <!-- Custom Theme JavaScript -->
-    <script src="css/dist/js/sb-admin-2.js"></script>
+    <script src="{{ asset('css/dist/js/sb-admin-2.js')}}"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
