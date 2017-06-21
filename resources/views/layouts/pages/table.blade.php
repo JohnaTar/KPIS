@@ -44,12 +44,12 @@
 }</style>
          <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">ตารางแสดงข้อมูลพนักงาน</h1>
+                    <h1 class="page-header">Datatable of employee</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
-            
-            <a href="{{url('register')}}" class="btn btn-info btn-sm"><i class="fa fa-user-plus fa-2x" aria-hidden="true"></i> </a>
+            <a href="{{url('register')}}"><i class="fa fa-user-plus fa-2x" aria-hidden="true"></i> : Add employee</a>
+           
    @if ($flash =session('message'))
                  
                        
@@ -74,7 +74,7 @@
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                            <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                            <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
                                 <thead>
                                     <tr>
                                         <th>ลำดับ</th>
@@ -82,39 +82,36 @@
                                         <th>ฝ่าย</th>
                                         <th>อีเมลล์</th>
                                         <th>แก้ไข</th>
-                                        <th>ลบ</th>
+                                       
+                                   
                                     </tr>
                                 </thead>
-                                <tbody>  
-
-    @foreach ($users as $user)
-                               
-
-                                    <tr>
-                            @if ($user->status_id=='1')                       
-                                    <td>{{ $loop->iteration}}</td>
-                                    <td> {{$user->name}}</td>     
-                                    <td> {{$user->dep_name}}</td>
-                                    <td >{{$user->email}}</td>
-                            @else
-                                    <td style="color: red;"><strike>{{ $loop->iteration}}</strike></td>
-                                    <td style="color: red;"><strike> {{$user->name}}</strike></td>     
-                                    <td style="color: red;"><strike>{{$user->dep_name}}</strike></td>
-                                    <td style="color: red;" ><strike  >{{$user->email}}</strike></td>
-                             @endif      
-                                        <td> <a href="{{url('edit_user/'.Crypt::encrypt($user->id))}}"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a>
-                                        </td>
-                                          <td> 
-                                          <a href="{{url('delete_user/'.$user->id)}}" onclick="return confirm('adasd')"><i class="fa fa-times fa-2x" aria-hidden="true"></i></a>                                      
-                                          </td>
-                                    </tr>
-    @endforeach 
-    
-                                </tbody>
+                                    
+                                
                             </table>
                             <!-- /.table-responsive -->
                     
+<script type="text/javascript">
+    $(function() {
+        $('#dataTables-example').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: 'http://192.168.1.16/KPIs/public/get_user_table',
+             
+            columns: [         
+            {data:'id' },
+            {data: 'name'},
+            {data: 'dep_name'},
+            {data: 'email'},
+            {data:'action',orderable:false}    
+        ],
+        order:[[0,'asc']]
 
+        });
+    
+    });
+
+</script>
 
                        
                         </div>

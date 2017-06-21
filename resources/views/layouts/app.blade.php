@@ -37,11 +37,16 @@
     <!-- Morris Charts JavaScript -->
     <script src="{{ asset('css/vendor/raphael/raphael.min.js')}}"></script>
     <script src="{{ asset('css/vendor/morrisjs/morris.min.js')}}"></script>
-    <script src="{{ asset('css/data/morris-data.js')}}"></script>
+ 
 
     <!-- Custom Theme JavaScript -->
-    <script src="{{ asset('css/dist/js/sb-admin-2.js')}}"></script>
+<script src="{{ asset('css/dist/js/sb-admin-2.js')}}"></script>
 
+<script src="https://datatables.yajrabox.com/js/jquery.dataTables.min.js"></script>
+<script src="https://datatables.yajrabox.com/js/datatables.bootstrap.js"></script>
+
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -77,25 +82,20 @@
                          
                         @else
                        
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <a >
                         <i class="fa fa-user fa-fw"></i> : {{ Auth::user()->name }}  <i class="fa fa-caret-down"></i>   
                          @endif
                     </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="{{ route('logout') }}"" onclick="event.preventDefault();
+
+                  
+                    <!-- /.dropdown-user -->
+                </li>
+                <li><a href="{{ route('logout') }}"" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                            <i class="fa fa-sign-out fa-fw"></i> Logout</a>
                                              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
                                         </form>
-                        </li>
-                    </ul>
-                    <!-- /.dropdown-user -->
                 </li>
                 <!-- /.dropdown -->
             </ul>
@@ -131,9 +131,7 @@
                         <li>
                             <a href="tables.html"><i class="fa fa-table fa-fw"></i> Tables</a>
                         </li>
-                        <li>
-                            <a href="{{url('log')}}"><i class="fa fa-edit fa-fw"></i> History log</a>
-                        </li>
+                       
                          <li>
                             <a href="{{url('table')}}"><i class="fa fa-sitemap fa-fw"></i> จัดการข้อมูลสมาชิก</a>
                         </li>
@@ -201,6 +199,9 @@
                                     <a href="login.html">Login Page</a>
                                 </li>
                             </ul>
+                             <li>
+                            <a href="{{url('log')}}"><i class="fa fa-edit fa-fw"></i> History log</a>
+                        </li>
                             <!-- /.nav-second-level -->
                         </li>
                     </ul>

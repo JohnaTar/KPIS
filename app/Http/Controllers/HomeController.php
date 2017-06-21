@@ -7,6 +7,7 @@ use App\User;
 use App\Department;
 use App\Historylog;
 use Illuminate\Support\Facades\Crypt;
+use Yajra\Datatables\Datatables;
 
 class HomeController extends Controller
 {
@@ -29,17 +30,31 @@ class HomeController extends Controller
     {
         return view('layouts.pages.home');
     }
-    public function table()
+    public function get_user_table()
     {
 
-        $users =DB::table('users')
-        ->orderBy('status_id','asc')
+      $users =DB::table('users')
         ->join('departments',function($join){
             $join->on('users.dep_id','=','departments.dep_id');
         })
         ->get();
-             return view('layouts.pages.table',['users'=>$users]);
+            return Datatables::of($users)
+            ->addColumn('action',function($user){
+              return '<a href="edit_user/'.Crypt::encrypt($user->id).'" ><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a>';
+            })
+         ->setRowClass(function ($users) {
+                return $users->status_id == 1 ? '' : 'alert-danger';
+            })
+
+            ->make(true);
+
+             /*return view('layouts.pages.table',['users'=>$users]);*/
     }
+
+    public function table(){
+        return view('layouts.pages.table');
+    }
+
     public function delete($id){
 
       /*User::find($id)->delete();*/

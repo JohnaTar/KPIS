@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Itmistakes;
 
 class ItController extends Controller
 {
@@ -11,9 +12,16 @@ class ItController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-      return view('layouts.pages.it');
+        $data =Itmistakes::all();
+      return view('layouts.pages.it',['data'=>$data]);
     }
 
     /**
@@ -23,7 +31,7 @@ class ItController extends Controller
      */
     public function create()
     {
-        //
+        return view('layouts.pages.itmistake');
     }
 
     /**
