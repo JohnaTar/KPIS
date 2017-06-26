@@ -1,47 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<style type="text/css">.notice {
-    padding: 15px;
-    background-color: #fafafa;
-    border-left: 6px solid #7f7f84;
-    margin-bottom: 10px;
-    -webkit-box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
-       -moz-box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
-            box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
-}
-.notice-sm {
-    padding: 10px;
-    font-size: 80%;
-}
-.notice-lg {
-    padding: 35px;
-    font-size: large;
-}
-.notice-success {
-    border-color: #80D651;
-}
-.notice-success>strong {
-    color: #80D651;
-}
-.notice-info {
-    border-color: #45ABCD;
-}
-.notice-info>strong {
-    color: #45ABCD;
-}
-.notice-warning {
-    border-color: #FEAF20;
-}
-.notice-warning>strong {
-    color: #FEAF20;
-}
-.notice-danger {
-    border-color: #d73814;
-}
-.notice-danger>strong {
-    color: #d73814;
-}</style>
+  @include('sweet::alert')
          <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">Datatable of employee</h1>
@@ -50,20 +10,9 @@
             </div>
             <a href="{{url('register')}}"><i class="fa fa-user-plus fa-2x" aria-hidden="true"></i> : Add employee</a>
            
-   @if ($flash =session('message'))
-                 
-                       
-<div class="row">
-    <div class="col-md-6"></div>
-    <div class="col-md-6">
-    <div class="notice notice-success">
-        <strong>Notice</strong> : {{$flash}}
-        </div>
-    </div>
-</div>
-@endif
-            <br>
-            <br>
+ <br>
+ <br>
+
 
 
             <div class="row">
@@ -74,6 +23,7 @@
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
+                         <div class="table-responsive">
                             <table width="100%" class="table  table-bordered table-hover" id="dataTables-example">
                                 <thead>
                                     <tr>
@@ -113,7 +63,7 @@
 
 </script>
 
-                       
+                       </div>
                         </div>
                         <!-- /.panel-body -->
                     </div>

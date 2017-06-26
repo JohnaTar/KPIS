@@ -4,11 +4,11 @@
 @include('sweet::alert')
          <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">ข้อผิดพลาดฝ่าย IT</h1>
+                    <h1 class="page-header">ข้อผิดพลาดฝ่าย HR</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
-            <a href="{{url('it/create')}}"><i class="fa fa-exclamation-circle fa-2x" aria-hidden="true"></i> : Add mistake</a>
+            <a href="{{url('hr/create')}}"><i class="fa fa-exclamation-circle fa-2x" aria-hidden="true"></i> : Add mistake</a>
 <br>
 <br>
  <p>
@@ -39,7 +39,7 @@
 
  <div class="row">
                 <div class="col-lg-12">
-                    <div class="panel panel-danger">
+                    <div class="panel panel-success">
                       <div class="panel-heading">
                             ข้อมูลความผิดพลาด 
                         </div>
@@ -50,10 +50,11 @@
                             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                                 <thead>
                                     <tr>
-                          
+                                       
                                         <th>วัน/เดือน/ปี</th>
                                         <th>ข้อผิดพลาด</th>
                                         <th>หมายเหตุ</th>
+                                        <th>ประเภท</th>
                                         <th>เพิ่มข้อมูลโดย</th>
                                         <th>เมนู</th>
                              
@@ -75,19 +76,22 @@
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
-    <script type="text/javascript">
+
+     <script type="text/javascript">
     $(function() {
         var table = $('#dataTables-example').DataTable({
             processing: true,
             serverSide: true,
             dom: 'lrtip',
-            ajax: 'http://192.168.1.16/KPIs/public/get_it_table',
+            ajax: 'http://192.168.1.16/KPIs/public/get_hr_table',
             columns: [         
             {data: 'date',name:'date'},
             {data: 'mistake'},
             {data: 'notice'},
+            {data: 'sta_name'},
             {data: 'name'},
-            {data:'action',orderable:false} , 
+            {data: 'action'},
+            
         ],
 
      });  
@@ -95,9 +99,7 @@
        table.search(this.value).draw();   
     });
 });
-      
-
-function delete_it(id){
+    function delete_hr(id){
   swal({
   title: "Are you sure?",
   text: "You will not be able to recover this imaginary file!",
@@ -109,7 +111,7 @@ function delete_it(id){
 },
 function(){
     var tar =id;
- window.location = 'it/' + tar;
+ window.location = 'hr/' + tar;
 
 });
   return false;
@@ -117,8 +119,7 @@ function(){
 
 
 
-
-
+      
 </script>
 
 

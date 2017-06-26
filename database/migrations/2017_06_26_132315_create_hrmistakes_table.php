@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateItmistakesTable extends Migration
+class CreateHrmistakesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateItmistakesTable extends Migration
      */
     public function up()
     {
-        Schema::create('itmistakes', function (Blueprint $table) {
-            $table->increments('it_id');
+        Schema::create('hrmistakes', function (Blueprint $table) {
+            $table->increments('hr_id');
             $table->date('date');
             $table->string('mistake');
             $table->string('notice')->nullable();
+            $table->string('mis_id');
             $table->string('add_id');
             $table->timestamps();
         });
@@ -30,6 +31,6 @@ class CreateItmistakesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('itmistakes');
+        Schema::dropIfExists('hrmistakes');
     }
 }

@@ -37,7 +37,8 @@
     <!-- Morris Charts JavaScript -->
     <script src="{{ asset('css/vendor/raphael/raphael.min.js')}}"></script>
     <script src="{{ asset('css/vendor/morrisjs/morris.min.js')}}"></script>
- 
+ <script src="{{ asset('css/alert/dist/sweetalert.min.js')}}"></script>
+<link rel="stylesheet" type="text/css" href="{{ asset('css/alert/dist/sweetalert.css')}}">
 
     <!-- Custom Theme JavaScript -->
 <script src="{{ asset('css/dist/js/sb-admin-2.js')}}"></script>
@@ -53,7 +54,47 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+<style type="text/css">.notice {
+    padding: 15px;
+    background-color: #fafafa;
+    border-left: 6px solid #7f7f84;
+    margin-bottom: 10px;
+    -webkit-box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
+       -moz-box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
+            box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
+}
+.notice-sm {
+    padding: 10px;
+    font-size: 80%;
+}
+.notice-lg {
+    padding: 35px;
+    font-size: large;
+}
+.notice-success {
+    border-color: #80D651;
+}
+.notice-success>strong {
+    color: #80D651;
+}
+.notice-info {
+    border-color: #45ABCD;
+}
+.notice-info>strong {
+    color: #45ABCD;
+}
+.notice-warning {
+    border-color: #FEAF20;
+}
+.notice-warning>strong {
+    color: #FEAF20;
+}
+.notice-danger {
+    border-color: #d73814;
+}
+.notice-danger>strong {
+    color: #d73814;
+}</style>
 </head>
 <body>
 
@@ -90,7 +131,7 @@
                   
                     <!-- /.dropdown-user -->
                 </li>
-                <li><a href="{{ route('logout') }}"" onclick="event.preventDefault();
+                <li><a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                            <i class="fa fa-sign-out fa-fw"></i> Logout</a>
                                              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -142,7 +183,7 @@
                                     <a href="{{url('it')}}">ฝ่าย IT</a>
                                 </li>
                                 <li>
-                                    <a href="buttons.html">Buttons</a>
+                                    <a href="{{url('hr')}}">ฝ่าย HR</a>
                                 </li>
                                 <li>
                                     <a href="notifications.html">Notifications</a>

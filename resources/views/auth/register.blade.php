@@ -29,7 +29,7 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
+            <div class="form-group{{ $errors->has('department') ? ' has-error' : '' }}">
                 <label class="col-md-4 control-label" for="selectbasic">Department</label>
                     <div class="col-md-3">
                     <select  name="department" class="form-control input-md" >
@@ -46,9 +46,9 @@
                                                        
                                  
  
-                @if ($errors->has('gender'))
+                @if ($errors->has('department'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('gender') }}</strong>
+                                        <strong>{{ $errors->first('department') }}</strong>
                                     </span>
                         @endif
                 </div>

@@ -3,17 +3,17 @@
 @section('content')
  <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Add Mistake : IT</h1>
+                    <h1 class="page-header">Add Mistake : HR</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-info">
+            <div class="panel panel-success">
                 <div class="panel-heading">ข้อผิดพลาด</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ route('it.store') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ route('hr.store') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('date') ? ' has-error' : '' }}">
@@ -44,6 +44,30 @@
                                 @endif
                             </div>
                         </div>
+                        <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
+                <label class="col-md-4 control-label" for="selectbasic">ประเภท</label>
+                    <div class="col-md-3">
+                    <select  name="type" class="form-control input-md" >
+                     <option value ='' >--> เลือก <-- </option>
+
+@foreach ($data as $datas)
+               
+               <option value ='{{$datas->id}}' @if(old('type')==$loop->iteration)selected @endif> {{$datas->sta_name}} </option>
+   @endforeach                
+             
+                </select>
+        
+                               
+                                                       
+                                 
+ 
+                @if ($errors->has('type'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('type') }}</strong>
+                                    </span>
+                        @endif
+                </div>
+            </div>
 
                         <div class="form-group{{ $errors->has('notice') ? ' has-error' : '' }}">
                             <label for="notice" class="col-md-4 control-label">หมายเหตุ</label>
@@ -59,7 +83,7 @@
                             </div>
                         </div>
                         
-
+                         
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">

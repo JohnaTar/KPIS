@@ -1,43 +1,43 @@
 <?php
-use Illuminate\Support\Facades\Crypt;
-namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
-use App\Itmistakes;
-use App\Historylog;
-use Yajra\Datatables\Datatables;
-use Illuminate\Support\Facades\DB;
-use Alert;
 
-class ItController extends Controller
+namespace App\Http\Controllers;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
+use Yajra\Datatables\Datatables;
+use App\Hrstatuses;
+use App\Hrmistakes;
+use App\Historylog;
+use Alert;
+use Illuminate\Support\Facades\Auth;
+class HrController extends Controller
 {
+        public function __construct()
+    {
+        $this->middleware('auth');
+    } 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
-public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-    public function get_data_it()
+      public function get_data_hr()
     {
 
-       $data =DB::table('itmistakes')
-        ->join('users',function($join){
-            $join->on('itmistakes.add_id','=','users.id');
+       $data =DB::table('hrmistakes')
+       ->join('users',function($join){
+            $join->on('hrmistakes.add_id','=','users.id');
+        })
+       ->join('hrstatuses',function($join){
+            $join->on('hrmistakes.mis_id','=','hrstatuses.id');
         })
         ->get();
         return Datatables::of($data)
-           ->addColumn('action', function ($user) {
-              return '<a href="it/'.$user->it_id.'/edit" ><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a> : 
-             <a href="" onclick="return delete_it('.$user->it_id.');" ><i class="fa fa-minus-square-o fa-2x" aria-hidden="true"></i></a>';
+            ->addColumn('action', function ($user) {
+              return '<a href="hr/'.$user->hr_id.'/edit" ><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a> : 
+             <a href="" onclick="return delete_hr('.$user->hr_id.');" ><i class="fa fa-minus-square-o fa-2x" aria-hidden="true"></i></a>';
 
             })
-           
-
+      
         ->make(true);
         
     }
@@ -45,7 +45,7 @@ public function __construct()
 
     public function index()
     {
-      return view('layouts.pages.it');
+       return view('layouts.pages.hr');
     }
 
     /**
@@ -54,8 +54,11 @@ public function __construct()
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        return view('layouts.pages.itmistake');
+    {   
+        $data = Hrstatuses::all();
+
+       return view('layouts.pages.hrmistake',['data'=>$data]);
+     
     }
 
     /**
@@ -66,24 +69,27 @@ public function __construct()
      */
     public function store(Request $request)
     {
-          $this->validate(request(),
+         $this->validate(request(),
                 [
               'date' => 'required',
               'mistake' => 'required',
+              'type' => 'required',
                 ]);
-          $data = new Itmistakes;
+
+          $data = new Hrmistakes;
           $data->date =$request['date'];
           $data->mistake=$request['mistake'];
           $data->notice=$request['notice'];
+          $data->mis_id=$request['type'];
           $data->add_id=Auth::user()->id;
           $data->save();
-
           $flight = new Historylog;
           $flight->user_id = Auth::user()->id;
-          $flight->action ="has add mistake IT ".$request['mistake']."  in the system at";
+          $flight->action ="has add mistake HR ".$request['mistake']."  in the system at";
           $flight->save();
            alert()->success('Completed!');
-          return redirect('it');
+         
+          return redirect('hr');
     }
 
     /**
@@ -94,15 +100,14 @@ public function __construct()
      */
     public function show($id)
     {
-        $data =Itmistakes::find($id);
-          
-          $flight = new Historylog;
+         $data =Hrmistakes::find($id);
+         $flight = new Historylog;
           $flight->user_id = Auth::user()->id;
-          $flight->action ="has delete mistake IT ".$data->mistake."  in the system at";
+          $flight->action ="has delete mistake HR ".$data->mistake."  in the system at";
           $flight->save();
-        $data->delete();
-    alert()->success('Deleted!');
-            return redirect('it');
+           $data->delete();
+           alert()->success('Deleted!');
+            return redirect('hr');
     }
 
     /**
@@ -113,14 +118,10 @@ public function __construct()
      */
     public function edit($id)
     {
-        $data =Itmistakes::where('it_id',$id)
-                  ->orderBy('it_id','desc')
+        $data =hrmistakes::where('hr_id',$id)
+                  ->orderBy('hr_id','desc')
                   ->get();
-        
-  
- 
-         return view('layouts.pages.edit_itmistake',['data'=>$data]);
-        
+            return view('layouts.pages.edit_hrmistake',['data'=>$data]);
     }
 
     /**
@@ -132,24 +133,28 @@ public function __construct()
      */
     public function update(Request $request, $id)
     {
-        $this->validate(request(),
+         $this->validate(request(),
                 [
               'date' => 'required',
               'mistake' => 'required',
+              'type' => 'required',
                 ]);
-        $tar =Itmistakes::find($id);
+         $tar =Hrmistakes::find($id);
         $tar->date=$request['date'];
         $tar->mistake=$request['mistake'];
         $tar->notice=$request['notice'];
+        $tar->mis_id=$request['type'];
+        $tar->add_id=Auth::user()->id;
         $tar->save();
           $flight = new Historylog;
           $flight->user_id = Auth::user()->id;
-          $flight->action ="has edit mistake IT ".$request['mistake']."  in the system at";
+          $flight->action ="has edit mistake HR ".$request['mistake']."  in the system at";
           $flight->save();
           alert()->success('แก้ไขข้อผิดพลาดเรียบร้อย');
-          return redirect('it');
-    
-      }
+          return redirect('hr');
+
+
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -159,6 +164,6 @@ public function __construct()
      */
     public function destroy($id)
     {
-        return 'destroy';
+        //
     }
 }

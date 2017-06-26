@@ -8,6 +8,7 @@ use App\Department;
 use App\Historylog;
 use Illuminate\Support\Facades\Crypt;
 use Yajra\Datatables\Datatables;
+use Alert;
 
 class HomeController extends Controller
 {
@@ -28,7 +29,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('layouts.pages.home');
+      $data =User::all()->count();
+        return view('layouts.pages.home',['data'=>$data]);
     }
     public function get_user_table()
     {
@@ -58,7 +60,7 @@ class HomeController extends Controller
     public function delete($id){
 
       /*User::find($id)->delete();*/
-      session()->flash('message','ลบข้อมูลพนักงานเรียบร้อย');
+      session()->flash('message','Completed!');
       return redirect('table');
     }
     public function edit($id){
@@ -91,7 +93,8 @@ class HomeController extends Controller
             $flights->action ="has edit user ".$request['name']."  in the system at'";
             $flights->save();
 
-            session()->flash('message','แก้ไขข้อมูลพนักงานเรียบร้อย');
+          alert()->success('Completed!');
+    /*alert()->success('แก้ไขข้อมูลพนักงานเรียบร้อย');*/
             return redirect('table');
 
            
