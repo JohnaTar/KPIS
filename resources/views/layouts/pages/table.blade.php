@@ -15,6 +15,7 @@
 
 
 
+
             <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-default">
@@ -45,6 +46,7 @@
     $(function() {
         $('#dataTables-example').DataTable({
             processing: true,
+            'iDisplayLength':25,
             serverSide: true,
             ajax: 'http://192.168.1.16/KPIs/public/get_user_table',
              

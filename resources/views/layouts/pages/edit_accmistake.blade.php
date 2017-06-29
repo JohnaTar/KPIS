@@ -3,7 +3,7 @@
 @section('content')
  <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Edit Mistake : HR</h1>
+                    <h1 class="page-header">Edit Mistake : ACC</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -11,11 +11,11 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-success">
+            <div class="panel panel-info">
                 <div class="panel-heading">แก้ไขข้อผิดพลาด</div>
                 <div class="panel-body">
 @foreach ($data as $datas)
-                    <form class="form-horizontal" role="form" method="POST" action="{{ action('HrController@update',['id'=>$datas->hr_id])}}" >
+                    <form class="form-horizontal" role="form" method="POST" action="{{ action('AccController@update',['id'=>$datas->acc_id])}}" >
                         {{ csrf_field() }}
 
                         <input type="hidden" name="_method" value ="PUT">
@@ -53,9 +53,9 @@
                     <div class="col-md-4">
                     <select  name="type" class="form-control input-md" >
                     <option value ='' >--> เลือก <-- </option>
-                    <option value ='1' @if ($datas->mis_id=='1')selected="selected"@endif> ข้อผิดพลาดในงาน </option>
-                     <option value ='2'  @if ($datas->mis_id=='2')selected="selected"@endif> payroll ผิด  </option>
-                     <option value ='3'  @if ($datas->mis_id=='3')selected="selected"@endif> จัดซื้อ จัดจ้าง จัดซ่อม </option>
+                    <option value ='1' @if ($datas->mis_id=='1')selected="selected"@endif> แจ้งหนี้ผิด(พบเองภายใน) </option>
+                     <option value ='2'  @if ($datas->mis_id=='2')selected="selected"@endif> แจ้งหนี้ผิด(ลูกค้าพบ)  </option>
+                     <option value ='3'  @if ($datas->mis_id=='3')selected="selected"@endif> ข้อผิดพลาดในงาน </option>
                      
              </select>
         
@@ -68,30 +68,7 @@
                 </div>
             </div>
 
-                 <div class="form-group{{ $errors->has('who') ? ' has-error' : '' }}">
-                <label class="col-md-4 control-label" for="selectbasic">ชื่อ</label>
-                    <div class="col-md-4">
-                    <select  name="who" class="form-control input-md" >
-                     <option value ='' >--> เลือก <-- </option>
-
-@foreach ($mama as $mamas)
-               
-               <option value ='{{$mamas->id}}' @if($datas->user_id==$mamas->id)selected @endif> {{$mamas->name}} </option>
-   @endforeach                
-             
-                </select>
-        
-                               
-                                                       
-                                 
- 
-                @if ($errors->has('who'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('who') }}</strong>
-                                    </span>
-                        @endif
-                </div>
-            </div>
+         
 
                         <div class="form-group{{ $errors->has('notice') ? ' has-error' : '' }}">
                             <label for="notice" class="col-md-4 control-label">หมายเหตุ</label>

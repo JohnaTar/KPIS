@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateHrmistakesTable extends Migration
+class CreateAccstatusesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,9 @@ class CreateHrmistakesTable extends Migration
      */
     public function up()
     {
-        Schema::create('hrmistakes', function (Blueprint $table) {
-            $table->increments('hr_id');
-            $table->date('date');
-            $table->string('mistake');
-            $table->string('notice')->nullable();
-            $table->string('mis_id');
-            $table->string('user_id');
+        Schema::create('accstatuses', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('sta_name');
             $table->timestamps();
         });
     }
@@ -31,6 +27,6 @@ class CreateHrmistakesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('hrmistakes');
+        Schema::dropIfExists('accstatuses');
     }
 }

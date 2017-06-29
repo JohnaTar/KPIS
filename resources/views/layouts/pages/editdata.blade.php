@@ -47,22 +47,18 @@
                             </div>
                         </div>
                         
-     
+
  
             <div class="form-group{{ $errors->has('department') ? ' has-error' : '' }}">
                 <label class="col-md-4 control-label" for="selectbasic">Department</label>
-                    <div class="col-md-4">
+                    <div class="col-md-5">
                     <select  name="department" class="form-control input-md" >
                     <option value ='' >--> เลือก <-- </option>
-                    <option value ='1' @if ($datas->dep_id=='1')selected="selected"@endif> ฝ่ายบริหาร </option>
-                     <option value ='2'  @if ($datas->dep_id=='2')selected="selected"@endif> ฝ่ายสารสนเทศ  </option>
-                     <option value ='3'  @if ($datas->dep_id=='3')selected="selected"@endif> PA & Marketing </option>
-                     <option value ='4'  @if ($datas->dep_id=='4')selected="selected"@endif> บัญชีและการเงิน  </option>
-                     <option value ='5'  @if ($datas->dep_id=='5')selected="selected"@endif> บุคคลและธุรการ  </option>
-                     <option value ='6'  @if ($datas->dep_id=='6')selected="selected"@endif> Staff & Labor Outsourcing Bangkok  </option>
-                     <option value ='7'  @if ($datas->dep_id=='7')selected="selected"@endif> Staff & Labor Outsourcing Chonburi  </option>
-                     <option value ='8'  @if ($datas->dep_id=='8')selected="selected"@endif Staff & Labor Outsourcing Pattaya  </option>
-             </select>
+                  @foreach ($dep as $dept)
+               
+               <option value ='{{$dept->dep_id}}' @if($datas->dep_id==$dept->dep_id)selected @endif> {{$dept->dep_name}} </option>
+   @endforeach
+                  </select>
         
  
                                                                           

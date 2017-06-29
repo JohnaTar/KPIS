@@ -1,43 +1,40 @@
 <?php
-use Illuminate\Support\Facades\Crypt;
-namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
-use App\Itmistakes;
-use App\Historylog;
-use Yajra\Datatables\Datatables;
-use Illuminate\Support\Facades\DB;
-use Alert;
 
-class ItController extends Controller
+namespace App\Http\Controllers;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
+use Yajra\Datatables\Datatables;
+use Illuminate\Support\Facades\Auth;
+use App\Accstatuses;
+use App\Accmistake;
+use App\Historylog;
+
+class AccController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
-public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-    public function get_data_it()
+     public function get_data_acc()
     {
 
-       $data =DB::table('itmistakes')
-        ->join('users',function($join){
-            $join->on('itmistakes.add_id','=','users.id');
+       $data =DB::table('accmistakes')
+       ->join('users',function($join){
+            $join->on('accmistakes.add_id','=','users.id');
         })
+        ->join('accstatuses',function($join){
+            $join->on('accmistakes.mis_id','=','accstatuses.id');
+        })
+    
         ->get();
         return Datatables::of($data)
            ->addColumn('action', function ($user) {
-              return '<a href="it/'.$user->it_id.'/edit" ><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a> : 
-             <a href="" onclick="return delete_it('.$user->it_id.');" ><i class="fa fa-minus-square-o fa-2x" aria-hidden="true"></i></a>';
+              return '<a href="acc/'.$user->acc_id.'/edit" ><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a> : 
+             <a href="" onclick="return delete_hr('.$user->acc_id.');" ><i class="fa fa-minus-square-o fa-2x" aria-hidden="true"></i></a>';
 
             })
-           
-
+       
         ->make(true);
         
     }
@@ -45,8 +42,13 @@ public function __construct()
 
     public function index()
     {
-      $wrong =Itmistakes::all()->count();
-      return view('layouts.pages.it',['wrong'=>$wrong]);
+        $in =Accmistake::where('mis_id',1)->count();
+        $out =Accmistake::where('mis_id',2)->count();
+        $wrong =Accmistake::where('mis_id',3)->count();
+        $data =array('in'=>$in,'out'=>$out,'wrong'=>$wrong);
+       
+        return view('layouts.pages.acc',['data'=>$data]);
+
     }
 
     /**
@@ -56,7 +58,8 @@ public function __construct()
      */
     public function create()
     {
-        return view('layouts.pages.itmistake');
+        $data =Accstatuses::all();
+            return view('layouts.pages.accmistake',['data'=>$data]);
     }
 
     /**
@@ -67,24 +70,27 @@ public function __construct()
      */
     public function store(Request $request)
     {
-          $this->validate(request(),
+         $this->validate(request(),
                 [
               'date' => 'required',
               'mistake' => 'required',
+              'type' => 'required',
+              'who_add'=>'required',
                 ]);
-          $data = new Itmistakes;
+         $data = new Accmistake;
           $data->date =$request['date'];
           $data->mistake=$request['mistake'];
           $data->notice=$request['notice'];
-          $data->add_id=Auth::user()->id;
+          $data->mis_id=$request['type'];
+          $data->add_id=$request['who_add'];
           $data->save();
-
           $flight = new Historylog;
           $flight->user_id = Auth::user()->id;
-          $flight->action ="has add mistake IT ".$request['mistake']."  in the system at";
+          $flight->action ="has add mistake ACC ".$request['mistake']."  in the system at";
           $flight->save();
-           alert()->success('Completed!');
-          return redirect('it');
+          alert()->success('Completed!');
+         
+          return redirect('acc');
     }
 
     /**
@@ -95,15 +101,14 @@ public function __construct()
      */
     public function show($id)
     {
-        $data =Itmistakes::find($id);
-          
-          $flight = new Historylog;
+         $data =Accmistake::find($id);
+         $flight = new Historylog;
           $flight->user_id = Auth::user()->id;
-          $flight->action ="has delete mistake IT ".$data->mistake."  in the system at";
+          $flight->action ="has delete mistake ACC ".$data->mistake."  in the system at";
           $flight->save();
-        $data->delete();
-    alert()->success('Deleted!');
-            return redirect('it');
+           $data->delete();
+           alert()->success('Deleted!');
+            return redirect('acc');
     }
 
     /**
@@ -114,14 +119,9 @@ public function __construct()
      */
     public function edit($id)
     {
-        $data =Itmistakes::where('it_id',$id)
-             
+          $data =Accmistake::where('acc_id',$id)
                   ->get();
-        
-  
- 
-         return view('layouts.pages.edit_itmistake',['data'=>$data]);
-        
+                return view('layouts.pages.edit_accmistake',['data'=>$data]);
     }
 
     /**
@@ -137,20 +137,22 @@ public function __construct()
                 [
               'date' => 'required',
               'mistake' => 'required',
+              'type' => 'required',
                 ]);
-        $tar =Itmistakes::find($id);
+        $tar =Accmistake::find($id);
         $tar->date=$request['date'];
         $tar->mistake=$request['mistake'];
         $tar->notice=$request['notice'];
+        $tar->mis_id=$request['type'];
         $tar->save();
           $flight = new Historylog;
           $flight->user_id = Auth::user()->id;
-          $flight->action ="has edit mistake IT ".$request['mistake']."  in the system at";
+          $flight->action ="has edit mistake ACC ".$request['mistake']."  in the system at";
           $flight->save();
-          alert()->success('แก้ไขข้อผิดพลาดเรียบร้อย');
-          return redirect('it');
-    
-      }
+            alert()->success('แก้ไขข้อผิดพลาดเรียบร้อย');
+          return redirect('acc');
+
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -160,6 +162,6 @@ public function __construct()
      */
     public function destroy($id)
     {
-        return 'destroy';
+        //
     }
 }

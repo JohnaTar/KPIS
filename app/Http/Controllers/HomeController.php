@@ -9,6 +9,7 @@ use App\Historylog;
 use Illuminate\Support\Facades\Crypt;
 use Yajra\Datatables\Datatables;
 use Alert;
+use Session;
 
 class HomeController extends Controller
 {
@@ -29,7 +30,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-      $data =User::all()->count();
+      $data =User::where('status_id',1)->count();
         return view('layouts.pages.home',['data'=>$data]);
     }
     public function get_user_table()
@@ -55,6 +56,7 @@ class HomeController extends Controller
 
     public function table(){
         return view('layouts.pages.table');
+    
     }
 
     public function delete($id){
@@ -69,8 +71,9 @@ class HomeController extends Controller
           $users =DB::table('users')
         ->where('id',$tar)
         ->get();
+         $data = Department::all();
  
-         return view('layouts.pages.editdata',['data'=>$users]);
+         return view('layouts.pages.editdata',['data'=>$users],['dep'=>$data]);
     }
     public function save_edit(Request $request){
 
@@ -98,7 +101,7 @@ class HomeController extends Controller
             return redirect('table');
 
            
-        
+     
 
 
     }

@@ -8,6 +8,31 @@
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
+               <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-red">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-thumb-tack fa-5x"></i>
+                                </div>
+
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">{{$wrong}}</div>
+                                    <div>ข้อผิดพลาดในงาน</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="">
+                            <div class="panel-footer">
+                              <!--   <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span> -->
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
             <a href="{{url('it/create')}}"><i class="fa fa-exclamation-circle fa-2x" aria-hidden="true"></i> : Add mistake</a>
 <br>
 <br>
@@ -51,11 +76,11 @@
                                 <thead>
                                     <tr>
                           
-                                        <th>วัน/เดือน/ปี</th>
+                                         <th style="width: 100px">วัน/เดือน/ปี</th>
                                         <th>ข้อผิดพลาด</th>
                                         <th>หมายเหตุ</th>
                                         <th>เพิ่มข้อมูลโดย</th>
-                                        <th>เมนู</th>
+                                        <th style="width: 100px">เมนู</th>
                              
                                     </tr>
                                 </thead>
@@ -80,10 +105,18 @@
         var table = $('#dataTables-example').DataTable({
             processing: true,
             serverSide: true,
+            'iDisplayLength':25,
             dom: 'lrtip',
+
             ajax: 'http://192.168.1.16/KPIs/public/get_it_table',
             columns: [         
-            {data: 'date',name:'date'},
+            {data: 'date',
+    "render": function (data) {
+        var date = new Date(data);
+        var month = date.getMonth() + 1;
+        return  date.getDate() + "/" +(month.length > 1 ? month : "0" + month) + "/" + date.getFullYear();
+    }
+},
             {data: 'mistake'},
             {data: 'notice'},
             {data: 'name'},
@@ -94,6 +127,7 @@
          $('#table-filter').on('change', function(){
        table.search(this.value).draw();   
     });
+
 });
       
 

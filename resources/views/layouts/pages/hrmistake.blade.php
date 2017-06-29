@@ -46,7 +46,7 @@
                         </div>
                         <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
                 <label class="col-md-4 control-label" for="selectbasic">ประเภท</label>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                     <select  name="type" class="form-control input-md" >
                      <option value ='' >--> เลือก <-- </option>
 
@@ -64,6 +64,30 @@
                 @if ($errors->has('type'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('type') }}</strong>
+                                    </span>
+                        @endif
+                </div>
+            </div>
+              <div class="form-group{{ $errors->has('who') ? ' has-error' : '' }}">
+                <label class="col-md-4 control-label" for="selectbasic">ชื่อ</label>
+                    <div class="col-md-4">
+                    <select  name="who" class="form-control input-md" >
+                     <option value ='' >--> เลือก <-- </option>
+
+@foreach ($mama as $mamas)
+               
+               <option value ='{{$mamas->id}}' @if(old('type')==$loop->iteration)selected @endif> {{$mamas->name}} </option>
+   @endforeach                
+             
+                </select>
+        
+                               
+                                                       
+                                 
+ 
+                @if ($errors->has('who'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('who') }}</strong>
                                     </span>
                         @endif
                 </div>

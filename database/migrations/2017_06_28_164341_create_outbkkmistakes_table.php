@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateHrmistakesTable extends Migration
+class CreateOutbkkmistakesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class CreateHrmistakesTable extends Migration
      */
     public function up()
     {
-        Schema::create('hrmistakes', function (Blueprint $table) {
-            $table->increments('hr_id');
+        Schema::create('outbkkmistakes', function (Blueprint $table) {
+            $table->increments('bkk_id');
             $table->date('date');
             $table->string('mistake');
             $table->string('notice')->nullable();
@@ -31,6 +31,6 @@ class CreateHrmistakesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('hrmistakes');
+        Schema::dropIfExists('outbkkmistakes');
     }
 }

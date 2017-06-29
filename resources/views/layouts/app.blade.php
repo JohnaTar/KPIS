@@ -155,7 +155,7 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="{{url('home')}}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
@@ -186,17 +186,12 @@
                                     <a href="{{url('hr')}}">ฝ่าย HR</a>
                                 </li>
                                 <li>
-                                    <a href="notifications.html">Notifications</a>
+                                    <a href="{{url('acc')}}">ฝ่าย ACC</a>
                                 </li>
-                                <li>
-                                    <a href="typography.html">Typography</a>
+                                 <li>
+                                    <a href="{{url('outBKK')}}">ฝ่าย OUTBKK</a>
                                 </li>
-                                <li>
-                                    <a href="icons.html"> Icons</a>
-                                </li>
-                                <li>
-                                    <a href="grid.html">Grid</a>
-                                </li>
+                              
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>

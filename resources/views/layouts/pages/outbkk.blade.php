@@ -2,10 +2,9 @@
 
 @section('content')
 @include('sweet::alert')
-
          <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">ข้อผิดพลาดฝ่าย HR</h1>
+                    <h1 class="page-header">ข้อผิดพลาดฝ่าย outBKK</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -19,8 +18,8 @@
                                 </div>
 
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">{{$data['wrong']}}</div>
-                                    <div>ข้อผิดพลาดในงาน</div>
+                                    <div class="huge">{{$tar['data']}}</div>
+                                    <div>งานทั่วไป</div>
                                 </div>
                             </div>
                         </div>
@@ -38,11 +37,11 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <i class="fa fa-tasks fa-5x"></i>
+                                    <i class="fa fa-credit-card-alt fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">{{$data['payroll']}}</div>
-                                    <div>Payroll ผิด</div>
+                                    <div class="huge">{{$tar['datas']}}</div>
+                                    <div>งานแจ้งหนี้</div>
                                 </div>
                             </div>
                         </div>
@@ -55,52 +54,8 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-yellow">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-shopping-cart fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">{{$data['buy']}}</div>
-                                    <div>จัดซื้อ จัดจ้าง จัดซ้อม</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                             <!--    <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span> -->
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-red">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-tag fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">13</div>
-                                    <div>สรรหาพนักงาน</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                         <!--        <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span> -->
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
             </div>
-            <a href="{{url('hr/create')}}"><i class="fa fa-exclamation-circle fa-2x" aria-hidden="true"></i> : Add mistake</a>
+            <a href="{{url('outBKK/create')}}"><i class="fa fa-exclamation-circle fa-2x" aria-hidden="true"></i> : Add mistake</a>
 <br>
 <br>
  <p>
@@ -131,7 +86,7 @@
 
  <div class="row">
                 <div class="col-lg-12">
-                    <div class="panel panel-success">
+                    <div class="panel panel-primary">
                       <div class="panel-heading">
                             ข้อมูลความผิดพลาด 
                         </div>
@@ -143,11 +98,11 @@
                                 <thead>
                                     <tr>
                                        
-                                        <th style="width: 100px">วัน/เดือน/ปี</th>
+                                      <th style="width: 100px">วัน/เดือน/ปี</th>
                                         <th>ข้อผิดพลาด</th>
                                         <th>หมายเหตุ</th>
-                                        <th>ชื่อผู้ทำผิด</th>
                                         <th>ประเภท</th>
+                                         <th>ชื่อผู้ทำผิด</th>
                                          <th style="width: 100px">เมนู</th>
                              
                                     </tr>
@@ -174,11 +129,11 @@
         var table = $('#dataTables-example').DataTable({
             processing: true,
             serverSide: true,
-            'iDisplayLength':25,
             dom: 'lrtip',
-            ajax: 'http://192.168.1.16/KPIs/public/get_hr_table',
+                'iDisplayLength':25,
+            ajax: 'http://192.168.1.16/KPIs/public/get_outbkk_table',
             columns: [         
-            {data: 'date',
+           {data: 'date',
     "render": function (data) {
         var date = new Date(data);
         var month = date.getMonth() + 1;
@@ -187,9 +142,10 @@
 },
             {data: 'mistake'},
             {data: 'notice'},
-            {data: 'name'},
             {data: 'sta_name'},
-            {data: 'action'},
+            {data: 'name'},
+            {data:'action'},
+      
             
         ],
 
@@ -210,7 +166,7 @@
 },
 function(){
     var tar =id;
- window.location = 'hr/' + tar;
+ window.location = 'outBKK/' + tar;
 
 });
   return false;

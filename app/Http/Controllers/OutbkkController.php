@@ -4,57 +4,42 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
-use App\Hrstatuses;
-use App\Hrmistakes;
-use App\Historylog;
+use App\Outbkkstatus;
 use App\User;
-use Alert;
+use App\Outbkkmistake;
+use App\Historylog;
 use Illuminate\Support\Facades\Auth;
-class HrController extends Controller
+class OutbkkController extends Controller
 {
-        public function __construct()
-    {
-        $this->middleware('auth');
-    } 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-      public function get_data_hr()
-    {
-
-       $data =DB::table('hrmistakes')
-       ->join('users',function($join){
-            $join->on('hrmistakes.user_id','=','users.id');
+    public function get_data_acc(){
+        $data =DB::table('outbkkmistakes')
+         ->join('users',function($join){
+            $join->on('outbkkmistakes.user_id','=','users.id');
         })
-       ->join('hrstatuses',function($join){
-            $join->on('hrmistakes.mis_id','=','hrstatuses.id');
+            ->join('outbkkstatuses',function($join){
+            $join->on('outbkkmistakes.mis_id','=','outbkkstatuses.id');
         })
-        ->get();
+          ->get();
         return Datatables::of($data)
-            ->addColumn('action', function ($user) {
-              return '<a href="hr/'.$user->hr_id.'/edit" ><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a> : 
-             <a href="" onclick="return delete_hr('.$user->hr_id.');" ><i class="fa fa-minus-square-o fa-2x" aria-hidden="true"></i></a>';
+          ->addColumn('action', function ($user) {
+              return '<a href="outBKK/'.$user->bkk_id.'/edit" ><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a> : 
+             <a href="" onclick="return delete_hr('.$user->bkk_id.');" ><i class="fa fa-minus-square-o fa-2x" aria-hidden="true"></i></a>';
 
             })
-      
-        ->make(true);
-        
+         ->make(true);
+
     }
-
-
     public function index()
-    {
-
-       
-        $wrong =Hrmistakes::where('mis_id',1)->count();
-        $payroll =Hrmistakes::where('mis_id',2)->count();
-        $buy =Hrmistakes::where('mis_id',3)->count();
-        $data =array('wrong'=>$wrong,'payroll'=>$payroll,'buy'=>$buy);
-       
-    
-        return view('layouts.pages.hr',['data'=>$data]);
+    {   
+        $data =Outbkkmistake::Where('mis_id',1)->count();
+        $datas =Outbkkmistake::Where('mis_id',2)->count();
+        $tar =array('data'=>$data,'datas'=>$datas);
+        return view('layouts.pages.outbkk',['tar'=>$tar]);
     }
 
     /**
@@ -64,14 +49,11 @@ class HrController extends Controller
      */
     public function create()
     {   
-        $data = Hrstatuses::all();
-        $mama = User::where('dep_id',3)
+        $data = Outbkkstatus::all();
+          $mama = User::where('dep_id',6)
                       ->where('status_id',1)
          ->get();
-        
-
-       return view('layouts.pages.hrmistake',['data'=>$data],['mama'=>$mama]);
-     
+        return view('layouts.pages.outbkkmistake',['data'=>$data],['mama'=>$mama]);
     }
 
     /**
@@ -82,15 +64,14 @@ class HrController extends Controller
      */
     public function store(Request $request)
     {
-         $this->validate(request(),
+          $this->validate(request(),
                 [
               'date' => 'required',
               'mistake' => 'required',
               'type' => 'required',
               'who'=>'required',
                 ]);
-
-          $data = new Hrmistakes;
+         $data = new Outbkkmistake;
           $data->date =$request['date'];
           $data->mistake=$request['mistake'];
           $data->notice=$request['notice'];
@@ -99,11 +80,11 @@ class HrController extends Controller
           $data->save();
           $flight = new Historylog;
           $flight->user_id = Auth::user()->id;
-          $flight->action ="has add mistake HR ".$request['mistake']."  in the system at";
+          $flight->action ="has add mistake outBKK ".$request['mistake']."  in the system at";
           $flight->save();
-           alert()->success('Completed!');
+             alert()->success('Completed!');
          
-          return redirect('hr');
+          return redirect('outBKK');
     }
 
     /**
@@ -114,14 +95,14 @@ class HrController extends Controller
      */
     public function show($id)
     {
-         $data =Hrmistakes::find($id);
+         $data =Outbkkmistake::find($id);
          $flight = new Historylog;
           $flight->user_id = Auth::user()->id;
-          $flight->action ="has delete mistake HR ".$data->mistake."  in the system at";
+          $flight->action ="has delete mistake outBKK ".$data->mistake."  in the system at";
           $flight->save();
            $data->delete();
            alert()->success('Deleted!');
-            return redirect('hr');
+            return redirect('outBKK');
     }
 
     /**
@@ -132,14 +113,13 @@ class HrController extends Controller
      */
     public function edit($id)
     {
-        $data =Hrmistakes::where('hr_id',$id)
+          $data =Outbkkmistake::where('bkk_id',$id)
                   ->get();
-        $mama = User::where('dep_id',3)
-                       ->where('status_id',1)
+         $mama = User::where('dep_id',6)
+                        ->where('status_id',1)
          ->get();
 
-         
-            return view('layouts.pages.edit_hrmistake',['data'=>$data],['mama'=>$mama]);
+        return view('layouts.pages.edit_bkkmistake',['data'=>$data],['mama'=>$mama]);
     }
 
     /**
@@ -151,27 +131,27 @@ class HrController extends Controller
      */
     public function update(Request $request, $id)
     {
-         $this->validate(request(),
+           $this->validate(request(),
                 [
               'date' => 'required',
               'mistake' => 'required',
               'type' => 'required',
-              'who' => 'required',
+              'who'=>'required',
                 ]);
-         $tar =Hrmistakes::find($id);
+        $tar =Outbkkmistake::find($id);
         $tar->date=$request['date'];
         $tar->mistake=$request['mistake'];
         $tar->notice=$request['notice'];
         $tar->mis_id=$request['type'];
         $tar->user_id=$request['who'];
         $tar->save();
-          $flight = new Historylog;
+         $flight = new Historylog;
           $flight->user_id = Auth::user()->id;
-          $flight->action ="has edit mistake HR ".$request['mistake']."  in the system at";
+          $flight->action ="has edit mistake outBKK ".$request['mistake']."  in the system at";
           $flight->save();
-          alert()->success('แก้ไขข้อผิดพลาดเรียบร้อย');
-          return redirect('hr');
-
+             alert()->success('Completed!');
+         
+          return redirect('outBKK');
 
     }
 
