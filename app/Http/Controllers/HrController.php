@@ -33,14 +33,15 @@ class HrController extends Controller
         })
         ->get();
         return Datatables::of($data)
+
             ->addColumn('action', function ($user) {
               return '<a href="hr/'.$user->hr_id.'/edit" ><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a> : 
              <a href="" onclick="return delete_hr('.$user->hr_id.');" ><i class="fa fa-minus-square-o fa-2x" aria-hidden="true"></i></a>';
-
             })
+          
       
         ->make(true);
-        
+
     }
 
 

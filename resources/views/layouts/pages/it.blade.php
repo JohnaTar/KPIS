@@ -33,6 +33,8 @@
                     </div>
                 </div>
             </div>
+
+         
             <a href="{{url('it/create')}}"><i class="fa fa-exclamation-circle fa-2x" aria-hidden="true"></i> : Add mistake</a>
 <br>
 <br>

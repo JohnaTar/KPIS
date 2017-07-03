@@ -16,7 +16,7 @@ class OutbkkController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function get_data_acc(){
+    public function get_data_outbkk(){
         $data =DB::table('outbkkmistakes')
          ->join('users',function($join){
             $join->on('outbkkmistakes.user_id','=','users.id');

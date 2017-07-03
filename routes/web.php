@@ -11,8 +11,9 @@
 |
 */
 
-
-
+Route::get('/', function () {
+    return view('auth.login');
+});
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -22,13 +23,20 @@ Route::get('/get_user_table', 'HomeController@get_user_table');
 Route::get('/get_it_table', 'ItController@get_data_it');
 Route::get('/get_hr_table', 'HrController@get_data_hr');
 Route::get('/get_acc_table', 'AccController@get_data_acc');
-Route::get('/get_outbkk_table', 'OutbkkController@get_data_acc');
+Route::get('/get_outbkk_table', 'OutbkkController@get_data_outbkk');
+Route::get('/get_email_table', 'EmailController@get_data_email');
 /*************************data table*******************************/
 Route::resource('it', 'ItController');
 Route::resource('hr', 'HrController');
 Route::resource('acc', 'AccController');
 Route::resource('outBKK', 'OutbkkController');
+Route::resource('email', 'EmailController');
 
+Route::get('BPIT','KpisController@BPIT');
+Route::get('ACC','KpisController@ACC');
+Route::get('HR','KpisController@HR');
+Route::get('IT','KpisController@IT');
+Route::get('outCHON','KpisController@outCHON');
 
 Route::get('/log','LogController@index');
 Route::get('/delete_user/{id}','HomeController@delete');

@@ -100,9 +100,13 @@
                     </div>
                 </div>
             </div>
+@if (Auth::user()->dep_id ==3)
+@else
             <a href="{{url('hr/create')}}"><i class="fa fa-exclamation-circle fa-2x" aria-hidden="true"></i> : Add mistake</a>
+@endif
 <br>
 <br>
+
  <p>
     <form class="form-horizontal">
      <div class="form-group">
@@ -148,7 +152,11 @@
                                         <th>หมายเหตุ</th>
                                         <th>ชื่อผู้ทำผิด</th>
                                         <th>ประเภท</th>
-                                         <th style="width: 100px">เมนู</th>
+                                        @if (Auth::user()->dep_id ==3)
+                                        @else
+                                          <th style="width: 100px" >เมนู</th>
+                                        @endif
+                                       
                              
                                     </tr>
                                 </thead>
@@ -168,8 +176,8 @@
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
-
-     <script type="text/javascript">
+@if (Auth::user()->dep_id ==3)
+ <script type="text/javascript">
     $(function() {
         var table = $('#dataTables-example').DataTable({
             processing: true,
@@ -189,8 +197,7 @@
             {data: 'notice'},
             {data: 'name'},
             {data: 'sta_name'},
-            {data: 'action'},
-            
+              
         ],
 
      });  
@@ -220,6 +227,59 @@ function(){
 
       
 </script>
+@else
+ <script type="text/javascript">
+    $(function() {
+        var table = $('#dataTables-example').DataTable({
+            processing: true,
+            serverSide: true,
+            'iDisplayLength':25,
+            dom: 'lrtip',
+            ajax: 'http://192.168.1.16/KPIs/public/get_hr_table',
+            columns: [         
+            {data: 'date',
+    "render": function (data) {
+        var date = new Date(data);
+        var month = date.getMonth() + 1;
+        return  date.getDate() + "/" +(month.length > 1 ? month : "0" + month) + "/" + date.getFullYear();
+    }
+},
+            {data: 'mistake'},
+            {data: 'notice'},
+            {data: 'name'},
+            {data: 'sta_name'},
+            {data: 'action'},        
+        ],
+
+     });  
+         $('#table-filter').on('change', function(){
+       table.search(this.value).draw();   
+    });
+});
+    function delete_hr(id){
+  swal({
+  title: "Are you sure?",
+  text: "You will not be able to recover this imaginary file!",
+  type: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#DD6B55",
+  confirmButtonText: "Yes, delete it!",
+  closeOnConfirm: false
+},
+function(){
+    var tar =id;
+ window.location = 'hr/' + tar;
+
+});
+  return false;
+}
+
+
+
+      
+</script>
+@endif
+    
 
 
     

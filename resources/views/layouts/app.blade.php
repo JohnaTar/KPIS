@@ -157,6 +157,27 @@
                         <li>
                             <a href="{{url('home')}}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
+                         <li>
+                            <a href="{{url('BPIT')}}"><i class="fa fa-building fa-fw"></i> KPIs BPIT</a>
+                        </li>
+                           <li>
+                            <a href="{{url('ACC')}}"><i class="fa fa-calculator fa-fw"></i> KPIs ACC</a>
+                        </li>
+                           <li>
+                            <a href="{{url('HR')}}"><i class="fa fa-header fa-fw"></i> KPIs HR</a>
+                        </li>
+                           <li>
+                            <a href="{{url('IT')}}"><i class="fa fa-laptop fa-fw"></i> KPIs IT</a>
+                        </li>
+                           <li>
+                            <a href="{{url('home')}}"><i class="fa fa-search-plus fa-fw"></i> KPIs outBKK</a>
+                        </li>
+                        <li>
+                            <a href="{{url('home')}}"><i class="fa fa-search-plus fa-fw"></i> KPIs outCHON</a>
+                        </li>
+                        <li>
+                            <a href="{{url('home')}}"><i class="fa fa-search-plus fa-fw"></i> KPIs outPTY</a>
+                        </li>
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -169,17 +190,30 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+           @if (Auth::user()->dep_id==3 || Auth::user()->dep_id==2 || Auth::user()->dep_id==1)
                         <li>
-                            <a href="tables.html"><i class="fa fa-table fa-fw"></i> Tables</a>
+                            <a href="{{url('email')}}"><i class="fa fa-table fa-fw"></i> ประวัติการส่งอีเมลล์</a>
                         </li>
-                       
-                         <li>
-                            <a href="{{url('table')}}"><i class="fa fa-sitemap fa-fw"></i> จัดการข้อมูลสมาชิก</a>
-                        </li>
+            @endif
+                    @if (Auth::user()->dep_id==5 ||Auth::user()->dep_id==7||Auth::user()->dep_id==8)
+                    @else
                         <li>
                             <a href="#"><i class="fa fa-wrench fa-fw"></i> รายงานข้อผิดพลาด<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
+                            @if (Auth::user()->dep_id==3)
+                                 <li>
+                                    <a href="{{url('hr')}}">ฝ่าย HR</a>
+                                </li>
+                            @elseif (Auth::user()->dep_id==4)
                                 <li>
+                                    <a href="{{url('acc')}}">ฝ่าย ACC</a>
+                                </li>
+                            @elseif (Auth::user()->dep_id==6)
+                                 <li>
+                                    <a href="{{url('outBKK')}}">ฝ่าย OUTBKK</a>
+                                </li>
+                            @else 
+                                 <li>
                                     <a href="{{url('it')}}">ฝ่าย IT</a>
                                 </li>
                                 <li>
@@ -191,10 +225,22 @@
                                  <li>
                                     <a href="{{url('outBKK')}}">ฝ่าย OUTBKK</a>
                                 </li>
+                            @endif
+                              
                               
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+    @endif
+    @if (Auth::user()->dep_id==2)
+
+                            <li>
+                            <a href="{{url('table')}}"><i class="fa fa-sitemap fa-fw"></i> จัดการข้อมูลสมาชิก</a>
+                        </li>
+                          <li>
+                            <a href="{{url('log')}}"><i class="fa fa-edit fa-fw"></i> History log</a>
+                        </li>
+  @endif
                         <li>
                             <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -235,9 +281,7 @@
                                     <a href="login.html">Login Page</a>
                                 </li>
                             </ul>
-                             <li>
-                            <a href="{{url('log')}}"><i class="fa fa-edit fa-fw"></i> History log</a>
-                        </li>
+                           
                             <!-- /.nav-second-level -->
                         </li>
                     </ul>

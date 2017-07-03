@@ -55,7 +55,11 @@
                     </div>
                 </div>
             </div>
-            <a href="{{url('outBKK/create')}}"><i class="fa fa-exclamation-circle fa-2x" aria-hidden="true"></i> : Add mistake</a>
+            @if (Auth::user()->dep_id==6)
+            @else
+             <a href="{{url('outBKK/create')}}"><i class="fa fa-exclamation-circle fa-2x" aria-hidden="true"></i> : Add mistake</a>
+            @endif
+           
 <br>
 <br>
  <p>
@@ -103,7 +107,11 @@
                                         <th>หมายเหตุ</th>
                                         <th>ประเภท</th>
                                          <th>ชื่อผู้ทำผิด</th>
-                                         <th style="width: 100px">เมนู</th>
+                                         @if (Auth::user()->dep_id==6)
+                                         @else
+                                              <th style="width: 100px">เมนู</th>
+                                         @endif
+                                     
                              
                                     </tr>
                                 </thead>
@@ -123,7 +131,56 @@
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
+@if (Auth::user()->dep_id==6)
+     <script type="text/javascript">
+    $(function() {
+        var table = $('#dataTables-example').DataTable({
+            processing: true,
+            serverSide: true,
+            dom: 'lrtip',
+                'iDisplayLength':25,
+            ajax: 'http://192.168.1.16/KPIs/public/get_outbkk_table',
+            columns: [         
+           {data: 'date',
+    "render": function (data) {
+        var date = new Date(data);
+        var month = date.getMonth() + 1;
+        return  date.getDate() + "/" +(month.length > 1 ? month : "0" + month) + "/" + date.getFullYear();
+    }
+},
+            {data: 'mistake'},
+            {data: 'notice'},
+            {data: 'sta_name'},
+            {data: 'name'},
+        
+      
+            
+        ],
 
+     });  
+         $('#table-filter').on('change', function(){
+       table.search(this.value).draw();   
+    });
+});
+    function delete_hr(id){
+  swal({
+  title: "Are you sure?",
+  text: "You will not be able to recover this imaginary file!",
+  type: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#DD6B55",
+  confirmButtonText: "Yes, delete it!",
+  closeOnConfirm: false
+},
+function(){
+    var tar =id;
+ window.location = 'outBKK/' + tar;
+
+});
+  return false;
+}    
+</script>
+@else
      <script type="text/javascript">
     $(function() {
         var table = $('#dataTables-example').DataTable({
@@ -176,6 +233,8 @@ function(){
 
       
 </script>
+@endif
+
 
 
     

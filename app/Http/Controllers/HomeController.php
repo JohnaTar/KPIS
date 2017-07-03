@@ -9,7 +9,7 @@ use App\Historylog;
 use Illuminate\Support\Facades\Crypt;
 use Yajra\Datatables\Datatables;
 use Alert;
-use Session;
+
 
 class HomeController extends Controller
 {
@@ -84,6 +84,7 @@ class HomeController extends Controller
               'department' =>'required',
              'status' =>'required',
                 ]);
+    
             $flight =User::find($request['userid']);
             $flight->name=$request['name'];
             $flight->email=$request['email'];
