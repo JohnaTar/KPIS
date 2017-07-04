@@ -160,36 +160,84 @@
                          <li>
                             <a href="{{url('BPIT')}}"><i class="fa fa-building fa-fw"></i> KPIs BPIT</a>
                         </li>
-                           <li>
+                        
+                    @if(Auth::user()->dep_id==1 ||Auth::user()->dep_id==2)
+
+                     <li>
                             <a href="{{url('ACC')}}"><i class="fa fa-calculator fa-fw"></i> KPIs ACC</a>
                         </li>
-                           <li>
-                            <a href="{{url('HR')}}"><i class="fa fa-header fa-fw"></i> KPIs HR</a>
-                        </li>
-                           <li>
-                            <a href="{{url('IT')}}"><i class="fa fa-laptop fa-fw"></i> KPIs IT</a>
-                        </li>
-                           <li>
-                            <a href="{{url('home')}}"><i class="fa fa-search-plus fa-fw"></i> KPIs outBKK</a>
-                        </li>
                         <li>
-                            <a href="{{url('home')}}"><i class="fa fa-search-plus fa-fw"></i> KPIs outCHON</a>
-                        </li>
-                        <li>
-                            <a href="{{url('home')}}"><i class="fa fa-search-plus fa-fw"></i> KPIs outPTY</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-header fa-fw"></i> KPIs HR<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="flot.html">Flot Charts</a>
+                                    <a href="{{url('HR')}}">HR</a>
+                                </li>
+                                 <li>
+                                    <a href="{{url('NAT')}}">NAT</a>
+                                </li>           
+                                   <li>
+                                    <a href="{{url('JEAB')}}">JEAB</a>
+                                </li>                               
+                                   <li>
+                                    <a href="{{url('MEAW')}}">MEAW</a>
+                                </li>
+                                   <li>
+                                    <a href="{{url('INK')}}">INK</a>
+                                </li>
+                                 <li>
+                                    <a href="{{url('JOOM')}}">JOOM</a>
                                 </li>
                                 <li>
-                                    <a href="morris.html">Morris.js Charts</a>
+                                    <a href="{{url('NONG')}}">NONG</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+                           <li>
+                            <a href="{{url('IT')}}"><i class="fa fa-laptop fa-fw"></i> KPIs IT</a>
+                        </li>
+                        <li>
+                           <a href="#"><i class="fa fa-search-plus fa-fw"></i> KPIs outBKK<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{{url('BKK')}}">outBKK</a>
+                                </li>
+                                 <li>
+                                    <a href="{{url('PLENG')}}">PLENG</a>
+                                </li>           
+                                   <li>
+                                    <a href="{{url('MAY')}}">MAY</a>
+                                </li>                               
+                                  
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+            
+                        <li>
+                            <a href="{{url('outCHON')}}"><i class="fa fa-search-plus fa-fw"></i> KPIs outCHON</a>
+                        </li>
+                        <li>
+                            <a href="{{url('outPTY')}}"><i class="fa fa-search-plus fa-fw"></i> KPIs outPTY</a>
+                        </li>
+
+<!--  #################ACC ###################### # -->                  
+                        @elseif(Auth::user()->dep_id==4)
+                          <li>
+                            <a href="{{url('ACC')}}"><i class="fa fa-calculator fa-fw"></i> KPIs ACC</a>
+                        </li>
+<!--  #################PTY ###################### # -->
+                        @elseif(Auth::user()->dep_id==7)
+                        <li>
+                            <a href="{{url('outPTY')}}"><i class="fa fa-search-plus fa-fw"></i> KPIs outPTY</a>
+                        </li>
+<!--  #################PTY ###################### # -->
+                        @elseif(Auth::user()->dep_id==8)
+                           <li>
+                            <a href="{{url('outCHON')}}"><i class="fa fa-search-plus fa-fw"></i> KPIs outCHON</a>
+                        </li>
+                    @endif
+
+                          
            @if (Auth::user()->dep_id==3 || Auth::user()->dep_id==2 || Auth::user()->dep_id==1)
                         <li>
                             <a href="{{url('email')}}"><i class="fa fa-table fa-fw"></i> ประวัติการส่งอีเมลล์</a>
@@ -241,49 +289,8 @@
                             <a href="{{url('log')}}"><i class="fa fa-edit fa-fw"></i> History log</a>
                         </li>
   @endif
-                        <li>
-                            <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="#">Second Level Item</a>
-                                </li>
-                                <li>
-                                    <a href="#">Second Level Item</a>
-                                </li>
-                                <li>
-                                    <a href="#">Third Level <span class="fa arrow"></span></a>
-                                    <ul class="nav nav-third-level">
-                                        <li>
-                                            <a href="#">Third Level Item</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Third Level Item</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Third Level Item</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Third Level Item</a>
-                                        </li>
-                                    </ul>
-                                    <!-- /.nav-third-level -->
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="blank.html">Blank Page</a>
-                                </li>
-                                <li>
-                                    <a href="login.html">Login Page</a>
-                                </li>
-                            </ul>
-                           
-                            <!-- /.nav-second-level -->
-                        </li>
+                       
+                       
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->

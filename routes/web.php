@@ -37,6 +37,17 @@ Route::get('ACC','KpisController@ACC');
 Route::get('HR','KpisController@HR');
 Route::get('IT','KpisController@IT');
 Route::get('outCHON','KpisController@outCHON');
+Route::get('outPTY','KpisController@outPTY');
+Route::get('HR','KpisController@HR');
+Route::get('JOOM','KpisController@JOOM');
+Route::get('JEAB','KpisController@JEAB');
+Route::get('NAT','KpisController@NAT');
+Route::get('MEAW','KpisController@MEAW');
+Route::get('INK','KpisController@INK');
+Route::get('NONG','KpisController@NONG');
+Route::get('BKK','KpisController@BKK');
+Route::get('PLENG','KpisController@PLENG');
+Route::get('MAY','KpisController@MAY');
 
 Route::get('/log','LogController@index');
 Route::get('/delete_user/{id}','HomeController@delete');
