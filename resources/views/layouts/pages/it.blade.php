@@ -18,7 +18,7 @@
                                 </div>
 
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">{{$wrong}}</div>
+                                    <div class="huge"><c></c></div>
                                     <div>ข้อผิดพลาดในงาน</div>
                                 </div>
                             </div>
@@ -127,7 +127,19 @@
 
      });  
          $('#table-filter').on('change', function(){
-       table.search(this.value).draw();   
+       table.search(this.value).draw();  
+          $.ajax({
+        url:"check.php",
+        data:'IT='+$('#table-filter').val(),
+        type:'POST',
+/*        dataType:'json',*/
+        success:function(data){
+        $('c').text(data);
+      
+               
+           
+        }
+       });   
     });
 
 });

@@ -19,7 +19,7 @@
                                 </div>
 
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">{{$data['wrong']}}</div>
+                                    <div class="huge"><c></c></div>
                                     <div>ข้อผิดพลาดในงาน</div>
                                 </div>
                             </div>
@@ -41,7 +41,7 @@
                                     <i class="fa fa-tasks fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">{{$data['payroll']}}</div>
+                                    <div class="huge"><n></n></div>
                                     <div>Payroll ผิด</div>
                                 </div>
                             </div>
@@ -63,7 +63,7 @@
                                     <i class="fa fa-shopping-cart fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">{{$data['buy']}}</div>
+                                    <div class="huge"><g></g></div>
                                     <div>จัดซื้อ จัดจ้าง จัดซ้อม</div>
                                 </div>
                             </div>
@@ -77,28 +77,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-red">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-tag fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">13</div>
-                                    <div>สรรหาพนักงาน</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                         <!--        <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span> -->
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+       
             </div>
 @if (Auth::user()->dep_id ==3)
 @else
@@ -203,6 +182,18 @@
      });  
          $('#table-filter').on('change', function(){
        table.search(this.value).draw();   
+          $.ajax({
+        url:"check.php",
+        data:'HR='+$('#table-filter').val(),
+        type:'POST',
+        dataType:'json',
+        success:function(data){
+              $('c').text(data['data']);
+              $('n').text(data['datas']);
+                 $('g').text(data['datass']);
+           
+        }
+       });  
     });
 });
     function delete_hr(id){
@@ -227,6 +218,7 @@ function(){
 
       
 </script>
+<!-- #################################################### -->
 @else
  <script type="text/javascript">
     $(function() {
@@ -253,7 +245,19 @@ function(){
 
      });  
          $('#table-filter').on('change', function(){
-       table.search(this.value).draw();   
+       table.search(this.value).draw();
+        $.ajax({
+        url:"check.php",
+        data:'HR='+$('#table-filter').val(),
+        type:'POST',
+        dataType:'json',
+        success:function(data){
+              $('c').text(data['data']);
+              $('n').text(data['datas']);
+                 $('g').text(data['datass']);
+           
+        }
+       });  
     });
 });
     function delete_hr(id){

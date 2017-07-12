@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('dep_id');
             $table->string('status_id')->default('1');
+            $table->string('head')->default('D');
             $table->rememberToken();
             $table->timestamps();
            

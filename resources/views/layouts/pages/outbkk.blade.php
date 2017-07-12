@@ -18,7 +18,7 @@
                                 </div>
 
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">{{$tar['data']}}</div>
+                                    <div class="huge" id="tuapai"></div>
                                     <div>งานทั่วไป</div>
                                 </div>
                             </div>
@@ -40,7 +40,7 @@
                                     <i class="fa fa-credit-card-alt fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">{{$tar['datas']}}</div>
+                                    <div class="huge" id="payroll"></div>
                                     <div>งานแจ้งหนี้</div>
                                 </div>
                             </div>
@@ -55,6 +55,99 @@
                     </div>
                 </div>
             </div>
+   <!--        ///////////////////////////////////////////////////////// -->
+              <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-optin-monster fa-5x"></i>
+                                </div>
+
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge" id="fu"></div>
+                                    <div>Fu</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="">
+                            <div class="panel-footer">
+                                <span class="pull-left"></span>
+                                <span class="pull-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-optin-monster fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge" id="pleng"></div>
+                                    <div>Pleng</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#">
+                            <div class="panel-footer">
+                                <span class="pull-left"></span>
+                                <span class="pull-right"></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-warning">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-optin-monster fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge" id="may"></div>
+                                    <div>May</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#">
+                            <div class="panel-footer">
+                                <span class="pull-left"></span>
+                                <span class="pull-right"></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                   <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-danger">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-optin-monster fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge" id="lookpad"></div>
+                                    <div>Lookpad</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#">
+                            <div class="panel-footer">
+                                <span class="pull-left"></span>
+                                <span class="pull-right"></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                </div>
+               
             @if (Auth::user()->dep_id==6)
             @else
              <a href="{{url('outBKK/create')}}"><i class="fa fa-exclamation-circle fa-2x" aria-hidden="true"></i> : Add mistake</a>
@@ -159,7 +252,22 @@
 
      });  
          $('#table-filter').on('change', function(){
-       table.search(this.value).draw();   
+       table.search(this.value).draw(); 
+         $.ajax({
+        url:"check.php",
+        data:'BKK='+$('#table-filter').val(),
+        type:'POST',
+        dataType:'json',
+        success:function(data){
+        $('#tuapai').text(data['tuapai']);
+        $('#payroll').text(data['payroll']);
+        $('#fu').text(data['fu']);
+        $('#pleng').text(data['pleng']);
+        $('#may').text(data['may']);
+        $('#lookpad').text(data['lookpad']);
+           
+        }
+       });    
     });
 });
     function delete_hr(id){
@@ -208,7 +316,22 @@ function(){
 
      });  
          $('#table-filter').on('change', function(){
-       table.search(this.value).draw();   
+       table.search(this.value).draw();
+        $.ajax({
+        url:"check.php",
+        data:'BKK='+$('#table-filter').val(),
+        type:'POST',
+        dataType:'json',
+        success:function(data){
+        $('#tuapai').text(data['tuapai']);
+        $('#payroll').text(data['payroll']);
+        $('#fu').text(data['fu']);
+        $('#pleng').text(data['pleng']);
+        $('#may').text(data['may']);
+        $('#lookpad').text(data['lookpad']);
+           
+        }
+       });     
     });
 });
     function delete_hr(id){

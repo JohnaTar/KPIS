@@ -11,6 +11,10 @@ use App\Historylog;
 
 class AccController extends Controller
 {
+     public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -42,12 +46,9 @@ class AccController extends Controller
 
     public function index()
     {
-        $in =Accmistake::where('mis_id',1)->count();
-        $out =Accmistake::where('mis_id',2)->count();
-        $wrong =Accmistake::where('mis_id',3)->count();
-        $data =array('in'=>$in,'out'=>$out,'wrong'=>$wrong);
+      
        
-        return view('layouts.pages.acc',['data'=>$data]);
+        return view('layouts.pages.acc');
 
     }
 

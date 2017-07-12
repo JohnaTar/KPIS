@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Middleware\Chon;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -53,6 +53,7 @@ Route::get('/log','LogController@index');
 Route::get('/delete_user/{id}','HomeController@delete');
 Route::get('edit_user/{id}','HomeController@edit');
 Route::post('edit_user/{id}','HomeController@save_edit');
+Route::get('P&L','PlController@index');
 
 
 

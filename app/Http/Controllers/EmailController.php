@@ -16,6 +16,10 @@ class EmailController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+        public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $now =Carbon::now();
@@ -45,10 +49,19 @@ class EmailController extends Controller
         }elseif ($data==12) {
             $month = 'ธันวาคม';
         }
+        if (Auth::user()->dep_id==1|| Auth::user()->dep_id==2) {
+                return view('layouts.pages.email');
+        }else{
+      $data =Sendemail::where([['month_id','=',$data],['who','=',Auth::user()->id]])->count();
+      $data2=Sendemail::where('who',Auth::user()->id)->count(); 
+        $array =array('data'=>$data,'sum'=>$month,'data2'=>$data2);
+            return view('layouts.pages.email',['data'=>$array]);
+           }
+         
+        
 
-      $data =Sendemail::where('date',$month)->count();
-        return view('layouts.pages.email',['data'=>$data]);
-    }
+}
+
 
      public function get_data_email(){
       /*  DB::statement(DB::raw('set @rownum=0'));
@@ -57,11 +70,27 @@ class EmailController extends Controller
             'co_name',
             'email',
             'who']);*/
+        
+
+        if (Auth::user()->dep_id==1 || Auth::user()->dep_id==2) {
+         $data =DB::table('sendemails')
+        ->orderBy('email_id','desc')
+          ->join('users',function($join){
+            $join->on('sendemails.who','=','users.id');
+        })
+              ->join('months',function($join){
+            $join->on('sendemails.month_id','=','months.month_id');
+        })
+        ->get();
+        }else{
         $data =DB::table('sendemails')
         ->orderBy('email_id','desc')
         ->where('who',Auth::user()->id)
+                ->join('months',function($join){
+            $join->on('sendemails.month_id','=','months.month_id');
+        })
         ->get();
-
+}
         return Datatables::of($data)
          
            ->addColumn('action', function ($user) {
@@ -99,9 +128,9 @@ class EmailController extends Controller
               'email'=>'required',
                 ]);
           $data = new Sendemail;
-          $data->date =$request['month'];
+          $data->month_id =$request['month'];
           $data->co_name=$request['name'];
-          $data->email=$request['email'];
+          $data->emails=$request['email'];
           $data->who=Auth::user()->id;
           $data->save();
           $flight = new Historylog;

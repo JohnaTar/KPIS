@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+@include('sweet::alert')
  <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">Dashboard</h1>
@@ -23,7 +24,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="{{url('table')}}">
+                        <a href="">
                             <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

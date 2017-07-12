@@ -45,8 +45,8 @@ public function __construct()
 
     public function index()
     {
-      $wrong =Itmistakes::all()->count();
-      return view('layouts.pages.it',['wrong'=>$wrong]);
+ 
+      return view('layouts.pages.it');
     }
 
     /**

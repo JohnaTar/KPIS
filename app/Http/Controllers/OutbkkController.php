@@ -36,10 +36,8 @@ class OutbkkController extends Controller
     }
     public function index()
     {   
-        $data =Outbkkmistake::Where('mis_id',1)->count();
-        $datas =Outbkkmistake::Where('mis_id',2)->count();
-        $tar =array('data'=>$data,'datas'=>$datas);
-        return view('layouts.pages.outbkk',['tar'=>$tar]);
+   ;
+        return view('layouts.pages.outbkk');
     }
 
     /**

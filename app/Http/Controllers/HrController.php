@@ -49,13 +49,10 @@ class HrController extends Controller
     {
 
        
-        $wrong =Hrmistakes::where('mis_id',1)->count();
-        $payroll =Hrmistakes::where('mis_id',2)->count();
-        $buy =Hrmistakes::where('mis_id',3)->count();
-        $data =array('wrong'=>$wrong,'payroll'=>$payroll,'buy'=>$buy);
+  
        
     
-        return view('layouts.pages.hr',['data'=>$data]);
+        return view('layouts.pages.hr');
     }
 
     /**

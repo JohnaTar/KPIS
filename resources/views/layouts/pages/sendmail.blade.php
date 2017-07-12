@@ -22,18 +22,18 @@
                     <div class="col-md-4">
                     <select  name="month" class="form-control input-md" >
                     <option value ='' >--> เลือก <-- </option>
-                     <option value ='มกราคม' >มกราคม</option>
-                     <option value ='กุมภาพันธ์' >กุมภาพันธ์</option>
-                     <option value ='มีนาคม' >มีนาคม</option>
-                     <option value ='เมษายน' >เมษายน</option>
-                     <option value ='พฤษภาคม' >พฤษภาคม</option>
-                     <option value ='มิถุนายน' >มิถุนายน</option>
-                     <option value ='กรกฎาคม' >กรกฎาคม</option>
-                     <option value ='สิงหาคม' >สิงหาคม</option>
-                     <option value ='กันยายนs' >กันยายน</option>
-                      <option value ='ตุลาคม' >ตุลาคม</option>
-                       <option value ='พฤศจิกายน' >พฤศจิกายน</option>
-                        <option value ='ธันวาคม' >ธันวาคม</option>
+                     <option value ='1' >มกราคม</option>
+                     <option value ='2' >กุมภาพันธ์</option>
+                     <option value ='3' >มีนาคม</option>
+                     <option value ='4' >เมษายน</option>
+                     <option value ='5' >พฤษภาคม</option>
+                     <option value ='6' >มิถุนายน</option>
+                     <option value ='7' >กรกฎาคม</option>
+                     <option value ='8' >สิงหาคม</option>
+                     <option value ='9' >กันยายน</option>
+                      <option value ='10' >ตุลาคม</option>
+                       <option value ='11' >พฤศจิกายน</option>
+                        <option value ='12' >ธันวาคม</option>
   
         </select>
              @if ($errors->has('month'))
@@ -47,7 +47,7 @@
                             <label for="name" class="col-md-4 control-label">ชื่อ / บริษัท</label>
 
                             <div class="col-md-6">
-                                <input  type="text" class="form-control" name="name" >
+                                <input  type="text" class="form-control" name="name" value="{{ old('name') }}">
 
                                 @if ($errors->has('name'))
                                     <span class="help-block">
@@ -60,7 +60,7 @@
                             <label for="email" class="col-md-4 control-label">อีเมลล์</label>
 
                             <div class="col-md-6">
-                                <input  type="text" class="form-control" name="email" >
+                                <input  type="text" class="form-control" name="email" value="{{ old('email') }}">
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">
@@ -69,11 +69,6 @@
                                 @endif
                             </div>
                         </div>
-                  
-                  
-
-                   
-                        
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">

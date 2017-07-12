@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Bootstrap Admin Theme</title>
+    <title>KPIs BPIT HOLDINGS</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="{{ asset ('css/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
@@ -109,7 +109,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">KPIs BPIT</a>
+                <a class="navbar-brand" href="{{url('home')}}">KPIs BPIT</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -235,8 +235,129 @@
                            <li>
                             <a href="{{url('outCHON')}}"><i class="fa fa-search-plus fa-fw"></i> KPIs outCHON</a>
                         </li>
+                        @elseif(Auth::user()->dep_id==3 && Auth::user()->head=='A')
+                             
+                        <li>
+                        <a href="#"><i class="fa fa-header fa-fw"></i> KPIs HR<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{{url('HR')}}">HR</a>
+                                </li>
+                                 <li>
+                                    <a href="{{url('NAT')}}">NAT</a>
+                                </li>           
+                                   <li>
+                                    <a href="{{url('JEAB')}}">JEAB</a>
+                                </li>                               
+                                   <li>
+                                    <a href="{{url('MEAW')}}">MEAW</a>
+                                </li>
+                                   <li>
+                                    <a href="{{url('INK')}}">INK</a>
+                                </li>
+                                 <li>
+                                    <a href="{{url('JOOM')}}">JOOM</a>
+                                </li>
+                                <li>
+                                    <a href="{{url('NONG')}}">NONG</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                       @elseif(Auth::user()->dep_id==3&& Auth::user()->id==11)
+                    <li>
+                        <a href="#"><i class="fa fa-header fa-fw"></i> KPIs HR<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{{url('HR')}}">HR</a>
+                                </li>
+                                 <li>
+                                    <a href="{{url('JEAB')}}">JEAB</a>
+                                </li>    
+                                
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                              @elseif(Auth::user()->dep_id==3&& Auth::user()->id==12)
+                        <li>
+                        <a href="#"><i class="fa fa-header fa-fw"></i> KPIs HR<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{{url('HR')}}">HR</a>
+                                </li>
+                                <li>
+                                    <a href="{{url('MEAW')}}">MEAW</a>
+                                </li>
+                                
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                            @elseif(Auth::user()->dep_id==3&& Auth::user()->id==13)
+                             <li>
+                        <a href="#"><i class="fa fa-header fa-fw"></i> KPIs HR<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{{url('HR')}}">HR</a>
+                                </li>
+                                <li>
+                                    <a href="{{url('INK')}}">INK</a>
+                                </li>
+                                
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        @elseif(Auth::user()->dep_id==6 && Auth::user()->head =='A')
+                        <li>
+                           <a href="#"><i class="fa fa-search-plus fa-fw"></i> KPIs outBKK<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{{url('BKK')}}">outBKK</a>
+                                </li>
+                                 <li>
+                                    <a href="{{url('PLENG')}}">PLENG</a>
+                                </li>           
+                                   <li>
+                                    <a href="{{url('MAY')}}">MAY</a>
+                                </li>                               
+                                  
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                         @elseif(Auth::user()->dep_id==6 && Auth::user()->id ==14)
+                           <li>
+                           <a href="#"><i class="fa fa-search-plus fa-fw"></i> KPIs outBKK<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{{url('BKK')}}">outBKK</a>
+                                </li>
+                                 <li>
+                                    <a href="{{url('MAY')}}">MAY</a>
+                                </li>                                                     
+                                  
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+             @elseif(Auth::user()->dep_id==6 && Auth::user()->id ==15)
+             <li>
+                           <a href="#"><i class="fa fa-search-plus fa-fw"></i> KPIs outBKK<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{{url('BKK')}}">outBKK</a>
+                                </li>
+                                 <li>
+                                    <a href="{{url('PLENG')}}">PLENG</a>
+                                </li>                               
+                                  
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
                     @endif
-
+                    @if (Auth::user()->dep_id==1 ||Auth::user()->dep_id==2 ||
+                    Auth::user()->dep_id==4)
+                      <li>
+                            <a href="{{url('P&L')}}"><i class="fa fa-paper-plane fa-fw"></i> รายงานการส่ง P&L</a>
+                        </li>
+                        @endif
                           
            @if (Auth::user()->dep_id==3 || Auth::user()->dep_id==2 || Auth::user()->dep_id==1)
                         <li>

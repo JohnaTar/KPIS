@@ -18,7 +18,7 @@
                                 </div>
 
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">{{$data['wrong']}}</div>
+                                    <div class="huge" ><n></n></div>
                                     <div>ข้อผิดพลาดในงาน</div>
                                 </div>
                             </div>
@@ -40,7 +40,7 @@
                                     <i class="fa fa-credit-card-alt fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">{{$data['in']}}</div>
+                                    <div class="huge"><c></c></div>
                                     <div>งานแจ้งหนี้(พบเอง)</div>
                                 </div>
                             </div>
@@ -62,7 +62,7 @@
                                     <i class="fa fa-credit-card-alt fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">{{$data['out']}}</div>
+                                    <div class="huge"><g></g></div>
                                     <div>งานแจ้งหนี้(ลูกค้าพบ)</div>
                                 </div>
                             </div>
@@ -82,7 +82,7 @@
 @else
  <a href="{{url('acc/create')}}"><i class="fa fa-exclamation-circle fa-2x" aria-hidden="true"></i> : Add mistake</a>
 @endif
-           
+      
 <br>
 <br>
  <p>
@@ -180,7 +180,19 @@
 
      });  
          $('#table-filter').on('change', function(){
-       table.search(this.value).draw();   
+       table.search(this.value).draw(); 
+        $.ajax({
+        url:"check.php",
+        data:'data='+$('#table-filter').val(),
+        type:'POST',
+        dataType:'json',
+        success:function(data){
+                $('c').text(data['data']);
+                $('n').text(data['data2']);
+                 $('g').text(data['data3']);
+        }
+       });
+
     });
 });
     function delete_hr(id){
@@ -229,10 +241,31 @@ function(){
 
      });  
          $('#table-filter').on('change', function(){
-       table.search(this.value).draw();   
+       table.search(this.value).draw();  
+       
+       $.ajax({
+        url:"check.php",
+        data:'data='+$('#table-filter').val(),
+        type:'POST',
+        dataType:'json',
+        success:function(data){
+                $('c').text(data['data']);
+                $('n').text(data['data2']);
+                 $('g').text(data['data3']);
+        }
+       });
+  
     });
 });
-    function delete_hr(id){
+
+
+
+
+
+
+
+
+ function delete_hr(id){
   swal({
   title: "Are you sure?",
   text: "You will not be able to recover this imaginary file!",

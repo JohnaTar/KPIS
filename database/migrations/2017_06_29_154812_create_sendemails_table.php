@@ -15,9 +15,9 @@ class CreateSendemailsTable extends Migration
     {
         Schema::create('sendemails', function (Blueprint $table) {
             $table->increments('email_id');
-            $table->string('date');
+            $table->string('month_id');
             $table->string('co_name');
-            $table->string('email');
+            $table->string('emails');
             $table->string('who');
             $table->timestamps();
         });

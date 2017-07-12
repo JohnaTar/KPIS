@@ -1,54 +1,167 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Alert;
 
 class KpisController extends Controller
 {
+   public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function BPIT(){
     	return view('layouts.pages.kpis_bpit');
     }
     public function ACC(){
-    	return view('layouts.pages.kpis_acc');
-    }
+    	if (Auth::user()->dep_id==1 || Auth::user()->dep_id==2 ||Auth::user()->dep_id==4) {
+                       return view('layouts.pages.kpis_acc');
+               }else{
+               	   alert()->error('No Permission!');
+               	return redirect('home');
+               }
+     	}
+    
      public function HR(){
-    	return view('layouts.pages.kpis_hr');
-    }
+     	if (Auth::user()->dep_id==1 || Auth::user()->dep_id==2 ||Auth::user()->dep_id==3) {
+                       return view('layouts.pages.kpis_hr');
+               }else{
+               	   alert()->error('No Permission!');
+               	return redirect('home');
+               }
+     	}
+    	
+    
     public function IT(){
-    	return view('layouts.pages.kpis_it');
-    }
+    	if (Auth::user()->dep_id==1 || Auth::user()->dep_id==2) {
+                       return view('layouts.pages.kpis_it');
+               }else{
+               	   alert()->error('No Permission!');
+               	return redirect('home');
+               }
+     	}
+
+    
      public function outCHON(){
-    	return view('layouts.pages.kpis_chon');
-    }
+     	if (Auth::user()->dep_id==1 || Auth::user()->dep_id==2 ||Auth::user()->dep_id==8) {
+                       return view('layouts.pages.kpis_chon');
+               }else{
+               	   alert()->error('No Permission!');
+               	return redirect('home');
+               }
+     	}
+    	
+    
     public function outPTY(){
-    	return view('layouts.pages.kpis_pty');
-    }
+    	if (Auth::user()->dep_id==1 || Auth::user()->dep_id==2 ||Auth::user()->dep_id==7) {
+                       return view('layouts.pages.kpis_pty');
+               }else{
+               	   alert()->error('No Permission!');
+               	return redirect('home');
+               }
+     	}
+    
      public function JOOM(){
-    	return view('layouts.pages.kpis_joom');
-    }
+     	if (Auth::user()->dep_id==1 || Auth::user()->dep_id==2) {
+                       return view('layouts.pages.kpis_joom');
+               }else if(Auth::user()->dep_id==3 &&Auth::user()->head=='A' ) {
+                         return view('layouts.pages.kpis_joom');
+               }else{
+                   alert()->error('No Permission!');
+                return redirect('home');
+               }
+      }
+    	
+    
     public function JEAB(){
-    	return view('layouts.pages.kpis_jeab');
-    }
+    	if (Auth::user()->dep_id==1 || Auth::user()->dep_id==2 ) {
+                       return view('layouts.pages.kpis_jeab');
+               }else if(Auth::user()->dep_id==3 &&Auth::user()->head=='A' ) {
+                         return view('layouts.pages.kpis_jeab');
+               }else if (Auth::user()->dep_id==3 &&Auth::user()->id==11 ){
+                       return view('layouts.pages.kpis_jeab');
+               }else{
+                alert()->error('No Permission!');
+                return redirect('home');
+               }
+     	}
+    	
     public function NAT(){
-    	return view('layouts.pages.kpis_nat');
-    }
+    	if (Auth::user()->dep_id==1 || Auth::user()->dep_id==2 ) {
+                       return view('layouts.pages.kpis_nat');
+               }else if(Auth::user()->dep_id==3 &&Auth::user()->head=='A' ) {
+                         return view('layouts.pages.kpis_nat');
+               }else{
+               	   alert()->error('No Permission!');
+               	return redirect('home');
+               }
+     	}
     public function MEAW(){
-    	return view('layouts.pages.kpis_meaw');
-    }
+      if (Auth::user()->dep_id==1 || Auth::user()->dep_id==2 ) {
+                       return view('layouts.pages.kpis_meaw');
+               }else if(Auth::user()->dep_id==3 &&Auth::user()->head=='A' ) {
+                         return view('layouts.pages.kpis_meaw');
+               }else if (Auth::user()->dep_id==3 &&Auth::user()->id==12 ){
+                       return view('layouts.pages.kpis_meaw');
+               }else{
+                alert()->error('No Permission!');
+                return redirect('home');
+               }            
+            }
+    
      public function INK(){
-    	return view('layouts.pages.kpis_ink');
-    }
+      if (Auth::user()->dep_id==1 || Auth::user()->dep_id==2 ) {
+                       return view('layouts.pages.kpis_ink');
+               }else if(Auth::user()->dep_id==3 &&Auth::user()->head=='A' ) {
+                         return view('layouts.pages.kpis_ink');
+               }else if (Auth::user()->dep_id==3 &&Auth::user()->id==13 ){
+                       return view('layouts.pages.kpis_ink');
+               }else{
+                alert()->error('No Permission!');
+                return redirect('home');
+               }
+     	}
+    
+    
     public function NONG(){
-    	return view('layouts.pages.kpis_nong');
-    }
+    	if (Auth::user()->dep_id==1 || Auth::user()->dep_id==2) {
+                       return view('layouts.pages.kpis_nong');
+               }else if(Auth::user()->dep_id==3 &&Auth::user()->head=='A' ) {
+                         return view('layouts.pages.kpis_nong');
+               }else{
+               	   alert()->error('No Permission!');
+               	return redirect('home');
+               }
+     	}
+    
+    
     public function BKK(){
-    	return view('layouts.pages.kpis_bkk');
-    }
+    	
+    	if (Auth::user()->dep_id==1 || Auth::user()->dep_id==2 ||Auth::user()->dep_id==6) {
+                       return view('layouts.pages.kpis_bkk');
+               }else{
+               	   alert()->error('No Permission!');
+               	return redirect('home');
+               }
+     	}
+    
     public function PLENG(){
-    	return view('layouts.pages.kpis_pleng');
-    }
+    	if (Auth::user()->dep_id==1 || Auth::user()->dep_id==2 ||Auth::user()->dep_id==6) {
+                       return view('layouts.pages.kpis_pleng');
+               }else{
+               	   alert()->error('No Permission!');
+               	return redirect('home');
+               }
+     	}
+    
      public function MAY(){
-    	return view('layouts.pages.kpis_may');
-    }
+    	if (Auth::user()->dep_id==1 || Auth::user()->dep_id==2 ||Auth::user()->dep_id==6) {
+                       return view('layouts.pages.kpis_may');
+               }else{
+               	   alert()->error('No Permission!');
+               	return redirect('home');
+               }
+     	}
+      
 }

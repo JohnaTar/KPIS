@@ -31,7 +31,7 @@
                         </div>
             <div class="form-group{{ $errors->has('department') ? ' has-error' : '' }}">
                 <label class="col-md-4 control-label" for="selectbasic">Department</label>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                     <select  name="department" class="form-control input-md" >
                      <option value ='' >--> เลือก <-- </option>
 
